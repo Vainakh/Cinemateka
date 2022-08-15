@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 
-import { Divider, List, ListItem, ListItemtext, ListSubheader, LIstItemIcon, box, circularProgress, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Divider, List, ListItem, ListItemtext, ListSubheader, LIstItemIcon, box, circularProgress, ListItemIcon, ListItemText, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/styles';
 import { useGetGenresQuery } from '../../services/TMDB';
 import useStyles from './styles';
+import genreIcons from '../../assets/genres';
+import genres from '../../assets/genres';
 
 const blackLogo = 'https://fontmeme.com/permalink/220814/1a389506638457580aa289d715817414.png';
 const blueLogo = 'https://fontmeme.com/permalink/220814/5fa78b111a734628933cfce7731e7751.png';
@@ -15,18 +17,10 @@ const Sidebar = ({ setMobileOpen }) => {
 
   const { data, error, isFetching } = useGetGenresQuery();
 
-  console.log(data);
-
   const categories = [
     { label: 'Popular', value: 'popular' },
     { label: 'Top Rated', value: 'top_rated' },
-    { label: 'Upcaming', value: 'uncoming' },
-  ];
-  const demoCategories = [
-    { label: 'Comedy', value: 'comedy' },
-    { label: 'Action', value: 'action' },
-    { label: 'Horror', value: 'horror' },
-    { label: 'Animation', value: 'animation' },
+    { label: 'Upcoming', value: 'upcoming' },
   ];
 
   return (
@@ -51,13 +45,13 @@ const Sidebar = ({ setMobileOpen }) => {
               onClick={() => {}}
               button
             >
-              {/* <ListItemIcon>
+              <ListItemIcon>
                 <img
-                  src={blueLogo}
+                  src={genreIcons[label.toLowerCase()]}
                   className={classes.genreImage}
                   height={30}
                 />
-              </ListItemIcon> */}
+              </ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>
           </Link>
@@ -83,13 +77,13 @@ const Sidebar = ({ setMobileOpen }) => {
               onClick={() => {}}
               button
             >
-              {/* <ListItemIcon>
+              <ListItemIcon>
                 <img
-                  src={blueLogo}
+                  src={genreIcons[name.toLowerCase()]}
                   className={classes.genreImage}
                   height={30}
                 />
-              </ListItemIcon> */}
+              </ListItemIcon>
               <ListItemText primary={name} />
             </ListItem>
           </Link>
