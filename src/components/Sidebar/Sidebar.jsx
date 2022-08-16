@@ -8,17 +8,19 @@ import { useGetGenresQuery } from '../../services/TMDB';
 import useStyles from './styles';
 import genreIcons from '../../assets/genres';
 import genres from '../../assets/genres';
+
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 const blackLogo = 'https://fontmeme.com/permalink/220814/1a389506638457580aa289d715817414.png';
 const blueLogo = 'https://fontmeme.com/permalink/220814/5fa78b111a734628933cfce7731e7751.png';
 
 const Sidebar = ({ setMobileOpen }) => {
+  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
+
   const theme = useTheme();
   const classes = useStyles();
   const { data, error, isFetching } = useGetGenresQuery();
   const dispatch = useDispatch();
-
   const categories = [
     { label: 'Popular', value: 'popular' },
     { label: 'Top Rated', value: 'top_rated' },

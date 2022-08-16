@@ -5,6 +5,6 @@ import genreOrCategoryReducer from '../features/currentGenreOrCategory';
 export default configureStore({
   reducer: {
     [tmdbApi.reducerPath]: tmdbApi.reducer,
-    currentGenreOrCategoryReducer: genreOrCategoryReducer,
+    currentGenreOrCategory: genreOrCategoryReducer,
   },
 });
