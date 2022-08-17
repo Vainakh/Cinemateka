@@ -3,8 +3,7 @@ import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery, Sli
 import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-
-import { Sidebar } from '..';
+import { Search, Sidebar } from '..';
 import useStyles from './styles';
 
 const Navbar = () => {
@@ -14,7 +13,6 @@ const Navbar = () => {
   const isAuthenticated = true;
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  console.log('Navbar');
   return (
     <>
       <AppBar position="fixed">
@@ -38,7 +36,7 @@ const Navbar = () => {
             >
               { theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
             </IconButton>
-            { !isMobile && 'Search...' }
+            { !isMobile && <Search />}
             <div>
               {!isAuthenticated ? (
                 <Button
@@ -64,7 +62,7 @@ const Navbar = () => {
                 </Button>
               )}
             </div>
-            { isMobile && 'Search...' }
+            { isMobile && <Search />}
           </>
         </Toolbar>
       </AppBar>

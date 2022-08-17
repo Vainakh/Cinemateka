@@ -18,11 +18,8 @@ export const tmdbApi = createApi({
         if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'string') {
           return `movie/${genreIdOrCategoryName}?page=${page}&api_key=${tmdbApiKey}`;
         }
-
-        console.log(genreIdOrCategoryName);
         // get movies by genres
         if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'number') {
-          console.log('Here');
           return `discover/movie?with_genres=${genreIdOrCategoryName}&page=${page}&api_key=${tmdbApiKey}`;
         }
         // get popular movies
