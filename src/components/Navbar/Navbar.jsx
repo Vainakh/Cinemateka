@@ -4,14 +4,16 @@ import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-materi
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { Search, Sidebar } from '..';
+import { fetchToken } from '../../utils';
 import useStyles from './styles';
 
 const Navbar = () => {
   const classes = useStyles();
   const isMobile = useMediaQuery('(max-width: 600px)');
   const theme = useTheme();
-  const isAuthenticated = true;
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const isAuthenticated = false;
 
   return (
     <>
@@ -41,15 +43,15 @@ const Navbar = () => {
               {!isAuthenticated ? (
                 <Button
                   color="inherit"
-                  onClick={() => {}}
+                  onClick={fetchToken}
                 >
                   Login &nbsp; <AccountCircle />
                 </Button>
               ) : (
                 <Button
                   color="inherit"
-                //   component={Link}
-                //   to="/profile/:id"
+                  component={Link}
+                  to="/profile/:id"
                   className={classes.linkButton}
                   onClick={() => {}}
                 >
