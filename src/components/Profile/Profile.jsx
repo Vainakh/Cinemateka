@@ -14,20 +14,9 @@ const Profile = () => {
 
   return (
     <Box>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-      >
-        <Typography
-          variant="h4"
-          gutterBottom
-        >
-          My Profiles
-        </Typography>
-        <Button
-          color="inherit"
-          onClick={logout}
-        >
+      <Box display="flex" justifyContent="space-between">
+        <Typography variant="h4" gutterBottom>My Profiles</Typography>
+        <Button color="inherit" onClick={logout}>
           Logout &nbsp; <ExitToApp />
         </Button>
       </Box>
