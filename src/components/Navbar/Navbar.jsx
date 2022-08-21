@@ -21,17 +21,13 @@ const Navbar = () => {
   const token = localStorage.getItem('request_token');
   const sessionIdFromLocalStorage = localStorage.getItem('session_id');
 
-  console.log(user);
-
   useEffect(() => {
     const logInUser = async () => {
       if (token) {
         if (sessionIdFromLocalStorage) {
-          console.log('1');
           const { data: userData } = await moviesApi.get(`/account?session_id=${sessionIdFromLocalStorage}`);
           dispatch(setUser(userData));
         } else {
-          console.log('2');
           const sessionId = createSessionId();
           const { data: userData } = await moviesApi.get(`/account?session_id=${sessionId}`);
           dispatch(setUser(userData));
@@ -77,7 +73,7 @@ const Navbar = () => {
                 <Button
                   color="inherit"
                   component={Link}
-                  to={`/profile/${user?.id}`}
+                  to={`/profile/${user.id}`}
                   className={classes.linkButton}
                   onClick={() => {}}
                 >
