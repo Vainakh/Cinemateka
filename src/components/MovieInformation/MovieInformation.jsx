@@ -77,9 +77,24 @@ const MovieInformation = () => {
           align="center"
           gutterBottom
         >
-          {data.title}
+          {data?.title} ({data?.release_date.split('-')[0]})
         </Typography>
-        <Grid />
+        <Typography
+          variant="h5"
+          align="center"
+          gutterBottom
+        >
+          {data?.tagline}
+        </Typography>
+        <Grid item className={classes.containerSpaceAround}>
+          <Box display="flex" align="center">
+            <Rating
+              readOnly
+              value={data?.vote_average / 2}
+            />
+            ({(data?.vote_average / 2).toFixed(2)})
+          </Box>
+        </Grid>
       </Grid>
     </Grid>
   );
