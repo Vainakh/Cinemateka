@@ -106,7 +106,7 @@ const MovieInformation = () => {
           <Typography
             variant="h6"
             align="center"
-            gutterButtom
+            gutterBottom
           >
             {data?.runtime}min {data?.spoken_languages.length > 0 ? `${data?.spoken_languages[0].english_name}` : ''}
           </Typography>
@@ -116,27 +116,102 @@ const MovieInformation = () => {
           className={classes.genresContainer}
         >
           {data?.genres.map((genre) => (
-            <>
-              <Link
-                key={genre.name}
-                className={classes.links}
-                to="/"
-                onClick={() => dispatch(selectGenreOrCategory(genre.id))}
+
+            <Link
+              key={genre.name}
+              className={classes.links}
+              to="/"
+              onClick={() => dispatch(selectGenreOrCategory(genre.id))}
+            >
+              <img
+                src={genreIcons[genre.name.toLowerCase()]}
+                className={classes.genreImage}
+                height={30}
+              />
+              <Typography
+                color="textPrimary"
+                variant="subtitle1"
+              >
+                {genre?.name}
+              </Typography>
+            </Link>
+          ))}
+        </Grid>
+        <Typography
+          variant="h5"
+          gutterBottom
+          style={{ marginTop: '10px' }}
+        >
+          Overview
+        </Typography>
+        <Typography
+          style={{ marginBottom: '2rem' }}
+        >
+          { data?.overview }
+        </Typography>
+        <Typography
+          variant="h5"
+          gutterBottom
+        >
+          Top Cast
+        </Typography>
+        <Grid
+          item
+          container
+          spacing={2}
+        >
+          {data && data.credits?.cast?.map((character, i) => (
+            character.profile_path
+              && (
+              <Grid
+                key={i}
+                item
+                xs={4}
+                md={2}
+                component={Link}
+                to={`/actors/${character.id}`}
+                style={{ textDecoration: 'none' }}
               >
                 <img
-                  src={genreIcons[genre.name.toLowerCase()]}
-                  className={classes.genreImage}
-                  height={30}
+                  className={classes.castImage}
+                  src={`https://image.tmdb.org/t/p/w500/${character.profile_path}`}
+                  alt={character.name}
                 />
                 <Typography
                   color="textPrimary"
-                  variant="subtitle1"
                 >
-                  {genre?.name}
+                  {character?.name}
                 </Typography>
-              </Link>
-            </>
-          ))}
+                <Typography
+                  color="textSecondary"
+                >
+                  {character?.character.split('/')[0]}
+                </Typography>
+              </Grid>
+              )
+          )).slice(0, 6)}
+        </Grid>
+        <Grid
+          item
+          container
+          style={{ marginTop: '2rem' }}
+        >
+          <div
+            className={classes.buttonsContainer}
+          >
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              className={classes.buttonsContainer}
+            />
+            <ButtonGroup
+              size="small"
+              variant="outlined"
+            >
+              <Button />
+            </ButtonGroup>
+          </div>
         </Grid>
       </Grid>
     </Grid>

@@ -46,4 +46,11 @@ export default makeStyles((theme) => ({
       padding: '0.5rem 1rem',
     },
   },
+  castImage: {
+    width: '100%',
+    maxWidth: '7em',
+    height: '8em',
+    objectFit: 'cover',
+    borderRadius: '10px',
+  },
 }));
