@@ -2,7 +2,7 @@ import React from 'react';
 import { CssBaseline } from '@mui/material';
 import { Route, Switch } from 'react-router-dom';
 
-import { Actors, MovieInfo, Movies, Profile, Navbar } from './index';
+import { Actors, MovieInformation, Movies, Profile, Navbar } from './index';
 import useStyles from './styles';
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
         <div className={classes.toolbar} />
         <Switch>
           <Route exact path="/movie/:id">
-            <MovieInfo />
+            <MovieInformation />
           </Route>
           <Route exact path="/actors/:id">
             <Actors />
