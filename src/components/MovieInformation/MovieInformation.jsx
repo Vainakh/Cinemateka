@@ -23,8 +23,10 @@ import {
 } from '@mui/icons-material';
 
 import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
+import genreIcons from '../../assets/genres';
 import { useGetMovieQuery } from '../../services/TMDB';
 import useStyles from './styles';
 
@@ -32,6 +34,7 @@ const MovieInformation = () => {
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
   const classes = useStyles();
+  const dispatch = useDispatch();
   console.log(data);
 
   if (isFetching) {
@@ -92,8 +95,48 @@ const MovieInformation = () => {
               readOnly
               value={data?.vote_average / 2}
             />
-            ({(data?.vote_average / 2).toFixed(2)})
+            <Typography
+              variant="subtitle1"
+              gutterBottom
+              style={{ marginLeft: '10px' }}
+            >
+              { (data?.vote_average / 2).toFixed(1) } / 10
+            </Typography>
           </Box>
+          <Typography
+            variant="h6"
+            align="center"
+            gutterButtom
+          >
+            {data?.runtime}min {data?.spoken_languages.length > 0 ? `${data?.spoken_languages[0].english_name}` : ''}
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          className={classes.genresContainer}
+        >
+          {data?.genres.map((genre) => (
+            <>
+              <Link
+                key={genre.name}
+                className={classes.links}
+                to="/"
+                onClick={() => dispatch(selectGenreOrCategory(genre.id))}
+              >
+                <img
+                  src={genreIcons[genre.name.toLowerCase()]}
+                  className={classes.genreImage}
+                  height={30}
+                />
+                <Typography
+                  color="textPrimary"
+                  variant="subtitle1"
+                >
+                  {genre?.name}
+                </Typography>
+              </Link>
+            </>
+          ))}
         </Grid>
       </Grid>
     </Grid>
