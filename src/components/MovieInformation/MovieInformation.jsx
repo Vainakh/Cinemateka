@@ -27,12 +27,13 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 import genreIcons from '../../assets/genres';
-import { useGetMovieQuery } from '../../services/TMDB';
+import { useGetMovieQuery, useGetRecommendationsQuery } from '../../services/TMDB';
 import useStyles from './styles';
 
 const MovieInformation = () => {
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
+  const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: id });
   const classes = useStyles();
   const dispatch = useDispatch();
   const isMoviefavorited = true;
@@ -40,7 +41,9 @@ const MovieInformation = () => {
 
   const addToFavorites = () => {};
   const addToWatchlist = () => {};
-  console.log(data);
+
+  console.log(recommendations);
+  // console.log(data);
 
   if (isFetching) {
     return (
@@ -286,9 +289,22 @@ const MovieInformation = () => {
               </Typography>
             </Button>
           </ButtonGroup>
-
         </Grid>
       </Grid>
+      <Box
+        marginTop="5rem"
+        width="100%"
+      >
+
+        <Typography
+          variant="h3"
+          gutterBottom
+          align="center"
+        >
+          You might also like:
+        </Typography>
+        {/* loop through the recomemded movies */}
+      </Box>
     </Grid>
   );
 };
