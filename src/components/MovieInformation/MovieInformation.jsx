@@ -25,6 +25,7 @@ import {
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import { MovieList } from '..';
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 import genreIcons from '../../assets/genres';
 import { useGetMovieQuery, useGetRecommendationsQuery } from '../../services/TMDB';
@@ -303,7 +304,7 @@ const MovieInformation = () => {
         >
           You might also like:
         </Typography>
-        {/* loop through the recomemded movies */}
+        {recommendations ? <MovieList movies={recommendations} numberOfMovies={12} /> : 'Sorry, nothing was found!'}
       </Box>
     </Grid>
   );
