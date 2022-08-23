@@ -17,7 +17,7 @@ import {
   Language,
   PlusOne,
   Favorite,
-  FavoriteBorderOtlined,
+  FavoriteBorderOutlined,
   Remove,
   ArrowBack,
 } from '@mui/icons-material';
@@ -35,6 +35,11 @@ const MovieInformation = () => {
   const { data, isFetching, error } = useGetMovieQuery(id);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const isMoviefavorited = true;
+  const isMovieWatchlisted = false;
+
+  const addToFavorites = () => {};
+  const addToWatchlist = () => {};
   console.log(data);
 
   if (isFetching) {
@@ -131,6 +136,7 @@ const MovieInformation = () => {
               <Typography
                 color="textPrimary"
                 variant="subtitle1"
+                style={{ textDecoration: 'none' }}
               >
                 {genre?.name}
               </Typography>
@@ -191,27 +197,96 @@ const MovieInformation = () => {
               )
           )).slice(0, 6)}
         </Grid>
+
         <Grid
           item
           container
           style={{ marginTop: '2rem' }}
         >
-          <div
+          <Grid
+            item
+            xs={12}
+            sm={6}
             className={classes.buttonsContainer}
+          />
+          <ButtonGroup
+            size="medium"
+            variant="outlined"
           >
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              className={classes.buttonsContainer}
-            />
-            <ButtonGroup
-              size="small"
-              variant="outlined"
+            <Button
+              targat="_blank"
+              ref={['noopener', 'noreferrer']}
+              href={data?.homepage}
+              endIcon={<Language />}
             >
-              <Button />
-            </ButtonGroup>
-          </div>
+              Website
+            </Button>
+            <Button
+              targat="_blank"
+              ref={['noopener', 'noreferrer']}
+              href={`https://www.imdb.com/title/${data?.imdb_id}`}
+              endIcon={<MovieIcon />}
+            >
+              IMDB
+            </Button>
+            <Button
+              onClick={() => {}}
+              href="#"
+              endIcon={<Theaters />}
+            >
+              Trailer
+            </Button>
+          </ButtonGroup>
+        </Grid>
+
+        <Grid
+          item
+          container
+          style={{ marginTop: '2rem' }}
+
+        >
+
+          <Grid
+            className={classes.buttonsContainer}
+            item
+            xs={12}
+            sm={6}
+
+          />
+          <ButtonGroup
+            size="small"
+            variant="outlined"
+          >
+            <Button
+              onClick={addToFavorites}
+              endIcon={isMoviefavorited ? <FavoriteBorderOutlined /> : <Favorite />}
+            >
+              {isMoviefavorited ? 'Unfavorite' : 'Favorite'}
+            </Button>
+
+            <Button
+              onClick={addToWatchlist}
+              endIcon={isMovieWatchlisted ? <Remove /> : <PlusOne />}
+            >
+              Watchlist
+            </Button>
+
+            <Button
+              endIcon={<ArrowBack />}
+              sx={{ borderColor: 'primary.main' }}
+            >
+              <Typography
+                component={Link}
+                to="/"
+                color="inherit"
+                variant="subtitle2"
+                style={{ textDecoration: 'none' }}
+              >
+                Back
+              </Typography>
+            </Button>
+          </ButtonGroup>
+
         </Grid>
       </Grid>
     </Grid>
