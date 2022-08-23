@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   Typography,
@@ -25,6 +25,7 @@ import {
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import { propsToClassKey } from '@mui/styles';
 import { MovieList } from '..';
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 import genreIcons from '../../assets/genres';
@@ -39,6 +40,7 @@ const MovieInformation = () => {
   const dispatch = useDispatch();
   const isMoviefavorited = true;
   const isMovieWatchlisted = false;
+  const [open, setOpen] = useState(false);
 
   const addToFavorites = () => {};
   const addToWatchlist = () => {};
@@ -306,6 +308,23 @@ const MovieInformation = () => {
         </Typography>
         {recommendations ? <MovieList movies={recommendations} numberOfMovies={12} /> : 'Sorry, nothing was found!'}
       </Box>
+      <Modal
+        closeAfterTransition
+        className={classes.modal}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        {data?.videos?.results?.length > 0 && (
+          <iframe
+            className={classes.video}
+            autoPlay
+            frameBorder="0"
+            title="Trailer"
+            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+            allow="autoplay"
+          />
+        )}
+      </Modal>
     </Grid>
   );
 };
