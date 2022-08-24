@@ -45,9 +45,6 @@ const MovieInformation = () => {
   const addToFavorites = () => {};
   const addToWatchlist = () => {};
 
-  console.log(recommendations);
-  // console.log(data);
-
   if (isFetching) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
@@ -236,7 +233,7 @@ const MovieInformation = () => {
               IMDB
             </Button>
             <Button
-              onClick={() => {}}
+              onClick={() => setOpen(true)}
               href="#"
               endIcon={<Theaters />}
             >
